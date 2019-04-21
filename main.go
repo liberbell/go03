@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-Type Page struct {
-  Name string
+type Page struct {
+	Name string
 }
 
 func main() {
@@ -15,10 +15,10 @@ func main() {
 	// fmt.Println("Hello, Go Web Developing.")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-    p := Page{Name: "Gopher"}
-    if name := r.FormValue("name"); name != "" {
-      p.Name = name
-    }
+		p := Page{Name: "Gopher"}
+		if name := r.FormValue("name"); name != "" {
+			p.Name = name
+		}
 		if err := templates.ExecuteTemplate(w, "index.html", p); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
