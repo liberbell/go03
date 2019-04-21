@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -9,12 +10,15 @@ import (
 )
 
 type Page struct {
-	Name string
+	Name     string
+	DBstatus bool
 }
 
 func main() {
 	templates := template.Must(template.ParseFiles("templates/index.html"))
 	// fmt.Println("Hello, Go Web Developing.")
+
+	db, _ := sql.Open("sqlite3", "dev.// DEBUG: ")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		p := Page{Name: "Gopher"}
