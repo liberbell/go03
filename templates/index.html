@@ -1,4 +1,9 @@
 <html>
  <head></head>
- <body>Hello, {{ .Name }}</body>
+ <body>
+   <p>Hello, {{ .Name }}</p>
+   {{ if .DBstatus }}
+     <p>The database connection is alive!</p>
+
+ </body>
 </html>
