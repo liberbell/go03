@@ -15,6 +15,7 @@ func main() {
 	// fmt.Println("Hello, Go Web Developing.")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    p := Page{Name: "Gopher"}
 		if err := templates.ExecuteTemplate(w, "index.html", p); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
