@@ -31,6 +31,7 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 		// fmt.Fprint(w, "Hello , Go Web Developing.")
+		db.Close()
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
