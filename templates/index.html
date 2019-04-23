@@ -18,7 +18,15 @@
     </table>
 
     <script type="text/javascript" src="jquery-3.4.0.min.js">
-
+    </script>
+    <script type="text/javascript">
+      function submitSearch() {
+        $.ajax({
+          url: "/search",
+          method: "POST",
+          data: $("#search form").serialize(),
+        })
+      }
     </script>
  </body>
 </html>
