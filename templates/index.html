@@ -1,11 +1,13 @@
 <html>
  <head></head>
  <body>
-   <p>Hello, {{ .Name }}</p>
-   {{ if .DBstatus }}
-     <p>The database connection is alive!</p>
-   {{ else }}
-     <p>The database connection is dead!</p>
-   {{ end }}
+   <form id="search-form">
+     <input name="search" />
+     <input type="submit" value="search" />
+   </form>
+
+   <table width="100%">
+     <thead></thead>
+     <tbody id="search results"></tbody>
  </body>
 </html>
