@@ -48,6 +48,9 @@ func main() {
 			SearchResult{"The Cather in the Ray", "JD Salinger", "1951", "333333"},
 		}
 		encoder := json.NewEncoder(w)
+		if err := encoder.Encode(results); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
