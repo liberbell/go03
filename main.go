@@ -41,7 +41,11 @@ func main() {
 		// db.Close()
 	})
 	http.Handlefunc("/search", func(w http.ResponseWriter, r *http.Request) {
-
+    result := []SearchResult{
+      SearchResult{"Mody Dick", "Helman Melville", "1851", "222222"},
+      SearchResult{"The Adventures of Huckleverry Finn", "Mark Twain", "1884", "444444"}
+      SearchResult{"The Cather in the Ray", "JD Salinger", "1951", "333333"}
+    }
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
