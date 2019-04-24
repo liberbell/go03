@@ -41,6 +41,7 @@ func main() {
 		// fmt.Fprint(w, "Hello , Go Web Developing.")
 		// db.Close()
 	})
+
 	http.HandlerFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		results := []SearchResult{
 			SearchResult{"Mody Dick", "Helman Melville", "1851", "222222"},
