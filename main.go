@@ -42,7 +42,7 @@ func main() {
 		// db.Close()
 	})
 
-	http.HandlerFunc("/search", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		results := []SearchResult{
 			SearchResult{"Mody Dick", "Helman Melville", "1851", "222222"},
 			SearchResult{"The Adventures of Huckleverry Finn", "Mark Twain", "1884", "444444"},
