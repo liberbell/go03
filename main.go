@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -46,6 +47,7 @@ func main() {
 			SearchResult{"The Adventures of Huckleverry Finn", "Mark Twain", "1884", "444444"},
 			SearchResult{"The Cather in the Ray", "JD Salinger", "1951", "333333"},
 		}
+		encoder := json.NewEncoder(w)
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
