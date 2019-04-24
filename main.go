@@ -14,6 +14,13 @@ type Page struct {
 	DBstatus bool
 }
 
+type SearchResult struct {
+	Title  string
+	Author string
+	Year   string
+	ID     string
+}
+
 func main() {
 	templates := template.Must(template.ParseFiles("templates/index.html"))
 	// fmt.Println("Hello, Go Web Developing.")
@@ -32,6 +39,9 @@ func main() {
 		}
 		// fmt.Fprint(w, "Hello , Go Web Developing.")
 		// db.Close()
+	})
+	http.Handlefunc("/search", func(w http.ResponseWriter, r *http.Request) {
+
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
