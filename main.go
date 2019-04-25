@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"net/url"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -55,4 +56,13 @@ func main() {
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
+}
+
+func search(query string) ([]SearchResult, error) {
+	var resp *http.Response
+	var err error
+
+	if resp, err = http.Get("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query)); err != nil {
+		return []SearchResult{}, err
+	}
 }
