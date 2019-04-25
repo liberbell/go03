@@ -65,4 +65,6 @@ func search(query string) ([]SearchResult, error) {
 	if resp, err = http.Get("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query)); err != nil {
 		return []SearchResult{}, err
 	}
+
+	defer resp.Body.Close()
 }
