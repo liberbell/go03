@@ -61,10 +61,13 @@ func main() {
 func search(query string) ([]SearchResult, error) {
 	var resp *http.Response
 	var err error
-
 	if resp, err = http.Get("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query)); err != nil {
 		return []SearchResult{}, err
 	}
 
 	defer resp.Body.Close()
+  bar Body []byte
+  if Body, err = ioutil.ReadAll(resp.Body); err != nil {
+    return []SearchResult(), err
+  }
 }
