@@ -60,7 +60,6 @@ func main() {
 
 type ClassifySearchRespnse struct {
   Results []SearchResult 'xml: "works>work"'
-
 }
 
 func search(query string) ([]SearchResult, error) {
