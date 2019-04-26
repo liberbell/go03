@@ -17,8 +17,8 @@ type Page struct {
 }
 
 type SearchResult struct {
-	Title  string
-	Author string
+	Title  string 'xml:"title,attr"'
+	Author string 'xml:"author,attr"'
 	Year   string
 	ID     string
 }
@@ -56,6 +56,11 @@ func main() {
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
+}
+
+type ClassifySearchRespnse struct {
+  Results []SearchResult 'xml: "works>work"'
+
 }
 
 func search(query string) ([]SearchResult, error) {
