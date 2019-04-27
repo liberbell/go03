@@ -17,10 +17,10 @@ type Page struct {
 }
 
 type SearchResult struct {
-	Title  string 'xml:"title,attr"'
-	Author string 'xml:"author,attr"'
-	Year   string 'xml:"hyr,attr"'
-	ID     string 'xml:"owi,attr"'
+	Title  string `xml:"title,attr"`
+	Author string `xml:"author,attr"`
+	Year   string `xml:"hyr,attr"`
+	ID     string `xml:"owi,attr"`
 }
 
 func main() {
