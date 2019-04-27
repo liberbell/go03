@@ -44,11 +44,18 @@ func main() {
 	})
 
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
-		results := []SearchResult{
-			SearchResult{"Mody Dick", "Helman Melville", "1851", "222222"},
-			SearchResult{"The Adventures of Huckleverry Finn", "Mark Twain", "1884", "444444"},
-			SearchResult{"The Cather in the Ray", "JD Salinger", "1951", "333333"},
-		}
+		// results := []SearchResult{
+			// SearchResult{"Mody Dick", "Helman Melville", "1851", "222222"},
+			// SearchResult{"The Adventures of Huckleverry Finn", "Mark Twain", "1884", "444444"},
+			// SearchResult{"The Cather in the Ray", "JD Salinger", "1951", "333333"},
+		// }
+    var results []SearchResult
+    var err error
+
+    if results, err = search(r.FormValue("search")); err != nil{
+      http.Error(w, err.Error(), http.StatusInternalSercerError)
+    }
+
 		encoder := json.NewEncoder(w)
 		if err := encoder.Encode(results); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -59,7 +66,7 @@ func main() {
 }
 
 type ClassifySearchRespnse struct {
-  Results []SearchResult 'xml: "works>work"'
+  Results []SearchResult 'xml:"works>work"'
 }
 
 func search(query string) ([]SearchResult, error) {
@@ -74,4 +81,8 @@ func search(query string) ([]SearchResult, error) {
   if Body, err = ioutil.ReadAll(resp.Body); err != nil {
     return []SearchResult(), err
   }
+
+  var c ClassifySearchRespnse
+  err = xml.Unmarshal(body, &c)
+  return c.Results, err
 }
