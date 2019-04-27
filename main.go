@@ -11,6 +11,9 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+
+
+
 type Page struct {
 	Name     string
 	DBstatus bool
@@ -26,7 +29,6 @@ type SearchResult struct {
 func main() {
 	templates := template.Must(template.ParseFiles("templates/index.html"))
 	// fmt.Println("Hello, Go Web Developing.")
-
 	db, _ := sql.Open("sqlite3", "dev.db")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -39,8 +41,6 @@ func main() {
 		if err := templates.ExecuteTemplate(w, "index.html", p); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
-		// fmt.Fprint(w, "Hello , Go Web Developing.")
-		// db.Close()
 	})
 
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
