@@ -15,7 +15,7 @@ import (
 
 type Page struct {
 	Name     string
-	DBstatus bool
+	DBStatus bool
 }
 
 type SearchResult struct {
@@ -35,7 +35,7 @@ func main() {
 		if name := r.FormValue("name"); name != "" {
 			p.Name = name
 		}
-		p.DBstatus = db.Ping() == nil
+		p.DBStatus = db.Ping() == nil
 
 		if err := templates.ExecuteTemplate(w, "index.html", p); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
