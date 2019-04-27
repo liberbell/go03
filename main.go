@@ -3,16 +3,15 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"encoding/xml"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 
 	_ "github.com/mattn/go-sqlite3"
 )
-
-
-
 
 type Page struct {
 	Name     string
@@ -45,16 +44,16 @@ func main() {
 
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		// results := []SearchResult{
-			// SearchResult{"Mody Dick", "Helman Melville", "1851", "222222"},
-			// SearchResult{"The Adventures of Huckleverry Finn", "Mark Twain", "1884", "444444"},
-			// SearchResult{"The Cather in the Ray", "JD Salinger", "1951", "333333"},
+		// SearchResult{"Mody Dick", "Helman Melville", "1851", "222222"},
+		// SearchResult{"The Adventures of Huckleverry Finn", "Mark Twain", "1884", "444444"},
+		// SearchResult{"The Cather in the Ray", "JD Salinger", "1951", "333333"},
 		// }
-    var results []SearchResult
-    var err error
+		var results []SearchResult
+		var err error
 
-    if results, err = search(r.FormValue("search")); err != nil {
-      http.Error(w, err.Error(), http.StatusInternalSercerError)
-    }
+		if results, err = search(r.FormValue("search")); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalSercerError)
+		}
 
 		encoder := json.NewEncoder(w)
 		if err := encoder.Encode(results); err != nil {
@@ -66,7 +65,7 @@ func main() {
 }
 
 type ClassifySearchResponse struct {
-  Results []SearchResult `xml:"works>work"`
+	Results []SearchResult `xml:"works>work"`
 }
 
 func search(query string) ([]SearchResult, error) {
@@ -78,12 +77,12 @@ func search(query string) ([]SearchResult, error) {
 	}
 
 	defer resp.Body.Close()
-  bar Body []byte
-  if Body, err = ioutil.ReadAll(resp.Body); err != nil {
-    return []SearchResult(), err
-  }
+	var body []byte
+	if body, err = ioutil.ReadAll(resp.Body); err != nil {
+		return []SearchResult{}, err
+	}
 
-  var c ClassifySearchRespnse
-  err = xml.Unmarshal(body, &c)
-  return c.Results, err
+	var c ClassifySearchRespnse
+	err = xml.Unmarshal(body, &c)
+	return c.Results, err
 }
