@@ -28,7 +28,7 @@ type SearchResult struct {
 
 func main() {
 	templates := template.Must(template.ParseFiles("templates/index.html"))
-	// fmt.Println("Hello, Go Web Developing.")
+	
 	db, _ := sql.Open("sqlite3", "dev.db")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
