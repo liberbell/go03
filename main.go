@@ -82,7 +82,7 @@ func search(query string) ([]SearchResult, error) {
 		return []SearchResult{}, err
 	}
 
-	var c ClassifySearchRespnse
+	var c ClassifySearchResponse
 	err = xml.Unmarshal(body, &c)
 	return c.Results, err
 }
