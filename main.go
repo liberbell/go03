@@ -28,7 +28,7 @@ type SearchResult struct {
 
 func main() {
 	templates := template.Must(template.ParseFiles("templates/index.html"))
-	
+
 	db, _ := sql.Open("sqlite3", "dev.db")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +52,7 @@ func main() {
     var results []SearchResult
     var err error
 
-    if results, err = search(r.FormValue("search")); err != nil{
+    if results, err = search(r.FormValue("search")); err != nil {
       http.Error(w, err.Error(), http.StatusInternalSercerError)
     }
 
@@ -62,16 +62,17 @@ func main() {
 		}
 	})
 
-	fmt.Println(http.ListenAndServe("localhost:8080", nil))
+	fmt.Println(http.ListenAndServe(":8080", nil))
 }
 
-type ClassifySearchRespnse struct {
+type ClassifySearchResponse struct {
   Results []SearchResult 'xml:"works>work"'
 }
 
 func search(query string) ([]SearchResult, error) {
 	var resp *http.Response
 	var err error
+
 	if resp, err = http.Get("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query)); err != nil {
 		return []SearchResult{}, err
 	}
