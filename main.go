@@ -8,7 +8,6 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
-	"net/url"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -84,11 +83,31 @@ type ClassifyBookResponse struct {
 }
 
 func search(query string) ([]SearchResult, error) {
+	// var resp *http.Response
+	// var err error
+	//
+	// if resp, err = http.Get("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query)); err != nil {
+	// 	return []SearchResult{}, err
+	// }
+	//
+	// defer resp.Body.Close()
+	// var body []byte
+	// if body, err = ioutil.ReadAll(resp.Body); err != nil {
+	// 	return []SearchResult{}, err
+	// }
+
+	var c ClassifySearchResponse
+	err = xml.Unmarshal(body, &c)
+	return c.Results, err
+}
+
+func ClassifyAPI(url string) ([]byte, error) {
 	var resp *http.Response
 	var err error
 
-	if resp, err = http.Get("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query)); err != nil {
-		return []SearchResult{}, err
+	// if resp, err = http.Get("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query)); err != nil {
+	if resp, err = http.Get(url); err != nil {
+		return []byte{}, err
 	}
 
 	defer resp.Body.Close()
@@ -96,8 +115,4 @@ func search(query string) ([]SearchResult, error) {
 	if body, err = ioutil.ReadAll(resp.Body); err != nil {
 		return []SearchResult{}, err
 	}
-
-	var c ClassifySearchResponse
-	err = xml.Unmarshal(body, &c)
-	return c.Results, err
 }
