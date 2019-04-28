@@ -62,7 +62,12 @@ func main() {
 	})
 
 	http.HandleFunc("/books/add", func(w http.ResponseWriter, r http.Request) {
+		var book ClassifyBookResponse
+		var err error
 
+		if book, err = find(r.FormValue("id")); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
