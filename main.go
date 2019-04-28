@@ -8,6 +8,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -97,11 +98,12 @@ func search(query string) ([]SearchResult, error) {
 	// }
 
 	var c ClassifySearchResponse
+	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query))
 	err = xml.Unmarshal(body, &c)
 	return c.Results, err
 }
 
-func ClassifyAPI(url string) ([]byte, error) {
+func classifyAPI(url string) ([]byte, error) {
 	var resp *http.Response
 	var err error
 
@@ -111,8 +113,6 @@ func ClassifyAPI(url string) ([]byte, error) {
 	}
 
 	defer resp.Body.Close()
-	var body []byte
-	if body, err = ioutil.ReadAll(resp.Body); err != nil {
-		return []SearchResult{}, err
-	}
+
+	return ioutil.ReadAll(resp.Body)
 }
