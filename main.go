@@ -61,11 +61,23 @@ func main() {
 		}
 	})
 
+	http.HandleFunc("/books/add", func(w http.ResponseWriter, r http.Request) {
+
+	})
+
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
 }
 
 type ClassifySearchResponse struct {
 	Results []SearchResult `xml:"works>work"`
+}
+
+type ClassifyBookResponse struct {
+	BookData struct {
+		Title  string `xml:"title.attr"`
+		Author string `xml:"author.attr"`
+		ID     string `xml:"owi.attr"`
+	}
 }
 
 func search(query string) ([]SearchResult, error) {
