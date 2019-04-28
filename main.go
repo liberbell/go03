@@ -83,12 +83,12 @@ type ClassifySearchResponse struct {
 
 type ClassifyBookResponse struct {
 	BookData struct {
-		Title  string `xml:"title.attr"`
-		Author string `xml:"author.attr"`
-		ID     string `xml:"owi.attr"`
+		Title  string `xml:"title,attr"`
+		Author string `xml:"author,attr"`
+		ID     string `xml:"owi,attr"`
 	} `xml:"work"`
 	Classification struct {
-		MostPopular string `xml:"sfa.attr"`
+		MostPopular string `xml:"sfa,attr"`
 	} `xml:"recommendations>ddc>mostPopular"`
 }
 
