@@ -72,7 +72,8 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 
-		_, err = db.Exec("insert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)")
+		_, err = db.Exec("insert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)",
+			nil, book.BookData.Title, book.BookData.Author, book.BookData.ID, book.Classification.MostPopular)
 	})
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
