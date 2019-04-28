@@ -83,6 +83,14 @@ type ClassifyBookResponse struct {
 	} `xml:"recommendations>ddc>mostPopular"`
 }
 
+func find(id string) (ClassifyBookResponse, error) {
+	var c ClassifyBookResponse
+	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?&summary=true&owi=" + url.QueryEscape(id))
+	if err != nil {
+		return ClassifyBookResponse, err
+	}
+}
+
 func search(query string) ([]SearchResult, error) {
 	// var resp *http.Response
 	// var err error
@@ -99,6 +107,9 @@ func search(query string) ([]SearchResult, error) {
 
 	var c ClassifySearchResponse
 	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query))
+	if err != nil {
+		return []SearchResult{}, err
+	}
 	err = xml.Unmarshal(body, &c)
 	return c.Results, err
 }
