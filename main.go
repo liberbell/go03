@@ -43,11 +43,6 @@ func main() {
 	})
 
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
-		// results := []SearchResult{
-		// SearchResult{"Mody Dick", "Helman Melville", "1851", "222222"},
-		// SearchResult{"The Adventures of Huckleverry Finn", "Mark Twain", "1884", "444444"},
-		// SearchResult{"The Cather in the Ray", "JD Salinger", "1951", "333333"},
-		// }
 		var results []SearchResult
 		var err error
 
@@ -99,7 +94,7 @@ type ClassifyBookResponse struct {
 
 func find(id string) (ClassifyBookResponse, error) {
 	var c ClassifyBookResponse
-	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?&summary=true&owi=" + url.QueryEscape(id))
+	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?summary=true&owi=" + url.QueryEscape(id))
 
 	if err != nil {
 		return ClassifyBookResponse{}, err
@@ -123,7 +118,7 @@ func search(query string) ([]SearchResult, error) {
 	// }
 
 	var c ClassifySearchResponse
-	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query))
+	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?summary=true&title=" + url.QueryEscape(query))
 	if err != nil {
 		return []SearchResult{}, err
 	}
@@ -135,7 +130,6 @@ func classifyAPI(url string) ([]byte, error) {
 	var resp *http.Response
 	var err error
 
-	// if resp, err = http.Get("http://classify.oclc.org/classify2/Classify?&summary=true&title=" + url.QueryEscape(query)); err != nil {
 	if resp, err = http.Get(url); err != nil {
 		return []byte{}, err
 	}
