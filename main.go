@@ -61,7 +61,7 @@ func main() {
 		}
 	})
 
-	fmt.Println(http.ListenAndServe(":8080", nil))
+	fmt.Println(http.ListenAndServe("localhost:8080", nil))
 }
 
 type ClassifySearchResponse struct {
