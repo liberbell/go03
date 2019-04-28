@@ -77,7 +77,10 @@ type ClassifyBookResponse struct {
 		Title  string `xml:"title.attr"`
 		Author string `xml:"author.attr"`
 		ID     string `xml:"owi.attr"`
-	}
+	} `xml:"work"`
+	Classification struct {
+		MostPopular string `xml:"sfa.attr"`
+	} `xml:"recommendations>ddc>mostPopular"`
 }
 
 func search(query string) ([]SearchResult, error) {
