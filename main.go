@@ -25,10 +25,12 @@ type SearchResult struct {
 	ID     string `xml:"owi,attr"`
 }
 
+var db *sql.DB
+
 func main() {
 	templates := template.Must(template.ParseFiles("templates/index.html"))
 
-	db, _ := sql.Open("sqlite3", "dev.db")
+	db, _ = sql.Open("sqlite3", "dev.db")
 
 	mux := http.NewServeMux()
 
