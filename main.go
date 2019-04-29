@@ -87,7 +87,7 @@ func main() {
 	})
 
 	n := negroni.Classic()
-	n.Use(negroni.HnadlerFunc(verifyDatabase))
+	n.Use(negroni.HandlerFunc(verifyDatabase))
 	n.UseHandler(mux)
 	n.Run(":8080")
 
