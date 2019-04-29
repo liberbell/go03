@@ -32,7 +32,7 @@ func verifyDatabase(w http.ResponseWriter, r *http.Request, next http.HandlerFun
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	db.Close()
+	// db.Close()
 	next(w, r)
 }
 
