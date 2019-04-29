@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"encoding/json"
 	"encoding/xml"
-	"fmt"
 	"html/template"
 	"io/ioutil"
 	"net/http"
@@ -79,8 +78,9 @@ func main() {
 
 	n := negroni.Classic()
 	n.UseHandler(mux)
+	n.Run(":8080")
 
-	fmt.Println(http.ListenAndServe("localhost:8080", nil))
+	// fmt.Println(http.ListenAndServe("localhost:8080", nil))
 }
 
 type ClassifySearchResponse struct {
