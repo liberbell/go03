@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/codegangsta/negroni"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -75,6 +76,9 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
+
+	n := negroni.Classic()
+	n.UseHandler(mux)
 
 	fmt.Println(http.ListenAndServe("localhost:8080", nil))
 }
