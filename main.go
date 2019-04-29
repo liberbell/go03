@@ -27,6 +27,8 @@ type SearchResult struct {
 
 var db *sql.DB
 
+func veryfyDatabase(w http.ResponseWriter, r *http.Request, next http.HandlerFunc)
+
 func main() {
 	templates := template.Must(template.ParseFiles("templates/index.html"))
 
