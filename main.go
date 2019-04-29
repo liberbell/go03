@@ -27,10 +27,12 @@ type SearchResult struct {
 
 var db *sql.DB
 
-func veryfyDatabase(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+func verifyDatabase(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	if err := db.Ping(); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
+	next(w, r)
 }
 
 func main() {
@@ -85,6 +87,7 @@ func main() {
 	})
 
 	n := negroni.Classic()
+	n.Use(negroni.HnadlerFunc(verifyDatabase))
 	n.UseHandler(mux)
 	n.Run(":8080")
 
