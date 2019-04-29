@@ -75,9 +75,9 @@ func main() {
 		if book, err = find(r.FormValue("id")); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
-		if err = db.Ping(); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
+		// if err = db.Ping(); err != nil {
+		// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+		// }
 
 		_, err = db.Exec("insert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)",
 			nil, book.BookData.Title, book.BookData.Author, book.BookData.ID, book.Classification.MostPopular)
