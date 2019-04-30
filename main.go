@@ -13,6 +13,13 @@ import (
 	"github.com/yosssi/ace"
 )
 
+type Book struct {
+	PK             int
+	Title          string
+	Author         string
+	Classifycation string
+}
+
 type Page struct {
 	Name     string
 	DBStatus bool
