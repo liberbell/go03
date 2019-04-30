@@ -20,8 +20,8 @@ html
       }
   body
    div#page-switcher
-    button
-    button
+    button View Library
+    button Add Books
 
     form id="search-form" onsubmit="return false"
       input name="search"
