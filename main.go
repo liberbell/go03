@@ -43,6 +43,10 @@ func main() {
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		template, err := ace.Load("templates/index", "", nil)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
 		p := Page{Name: "Gopher"}
 		if name := r.FormValue("name"); name != "" {
 			p.Name = name
