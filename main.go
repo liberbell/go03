@@ -54,7 +54,7 @@ func main() {
 		}
 
 		p := Page{Books: []Book{}}
-		rows, _ := db.Querry("select pk,title,Classification from books")
+		rows, _ := db.Query("select pk,title,Classification from books")
 		for rows.Next() {
 			var b Book
 			rows.Scan(&b.PK, &b.Title, &b.Author, &b.Classifycation)
