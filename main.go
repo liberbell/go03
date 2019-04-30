@@ -4,13 +4,13 @@ import (
 	"database/sql"
 	"encoding/json"
 	"encoding/xml"
-	"html/template"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 
 	"github.com/codegangsta/negroni"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/yosssi/ace"
 )
 
 type Page struct {
@@ -37,13 +37,12 @@ func verifyDatabase(w http.ResponseWriter, r *http.Request, next http.HandlerFun
 }
 
 func main() {
-	templates := template.Must(template.ParseFiles("templates/index.html"))
-
 	db, _ = sql.Open("sqlite3", "dev.db")
 
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		template, err := ace.Load("templates/index", "", nil)
 		p := Page{Name: "Gopher"}
 		if name := r.FormValue("name"); name != "" {
 			p.Name = name
