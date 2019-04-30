@@ -21,8 +21,7 @@ type Book struct {
 }
 
 type Page struct {
-	Name     string
-	DBStatus bool
+	Books []book
 }
 
 type SearchResult struct {
@@ -54,11 +53,13 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 
-		p := Page{Name: "Gopher"}
-		if name := r.FormValue("name"); name != "" {
-			p.Name = name
+		p := Page{Books: []Book{}}
+		rows, _ := db.Querry("select pk,title,Classification from books")
+		for rows.Next() {
+			var b Book
+			rows.Scan(&b.PK, &b.Title, &b.Author, &b.Classifycation)
+			p.Books = append(p.Books, b)
 		}
-		p.DBStatus = db.Ping() == nil
 
 		if err = template.Execute(w, p); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
