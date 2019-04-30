@@ -8,6 +8,7 @@ html
         cursor: pointer;
       }
   body
+   div
     form id="search-form" onsubmit="return false"
       input name="search"
       input type="submit" value="Search" onclick="submitSearch()"
