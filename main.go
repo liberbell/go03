@@ -53,7 +53,7 @@ func main() {
 		}
 		p.DBStatus = db.Ping() == nil
 
-		if err := templates.ExecuteTemplate(w, "index.html", p); err != nil {
+		if err = template.Execute(w, p); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
