@@ -7,13 +7,10 @@
         background-color: lightgrey;
         cursor: pointer;
       }
-    </style>
-  </head>
   <body>
     <form id="search-form" onsubmit="return false">
       <input name="search" />
       <input type="submit" value="Search" onclick="submitSearch()" />
-    </form>
 
     <table width="100%">
       <thead>
@@ -22,10 +19,7 @@
           <th width="30%">Author</th>
           <th width="10%">Year</th>
           <th width="20%">ID</th>
-        </tr>
-      </thead>
       <tbody id="search-results"></tbody>
-    </table>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <!-- <script type="text/javascript" src="jquery-3.4.0.min.js"></script> -->
