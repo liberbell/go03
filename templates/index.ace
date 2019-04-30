@@ -20,21 +20,24 @@ html
       }
   body
    div#page-switcher
-    button View Library
-    button Add Books
+    button onclick="showViewPage" View Library
+    button onclick="showSearchpage" Add Books
 
-    form id="search-form" onsubmit="return false"
-      input name="search"
-      input type="submit" value="Search" onclick="submitSearch()"
+   div#search-page
+      form id="search-form" onsubmit="return false"
+        input name="search"
+        input type="submit" value="Search" onclick="submitSearch()"
 
-    table width="100%"
-      thead
-        tr style="text-align: left;"
-          th width="40%" Title
-          th width="30%" Author
-          th width="10%" Year
-          th width="20%" ID
-      tbody id="search-results"
+      table width="100%"
+        thead
+          tr style="text-align: left;"
+            th width="40%" Title
+            th width="30%" Author
+            th width="10%" Year
+            th width="20%" ID
+        tbody id="search-results"
+
+    div#view-page
 
     script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"
     = javascript
