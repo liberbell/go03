@@ -7,8 +7,22 @@ html
         background-color: lightgrey;
         cursor: pointer;
       }
+
+      #page-switcher {
+        width:100%;
+        text-align: center;
+      }
+      #page-switcher {
+        font-size: 24px;
+        font-weight: bold;
+        margin: lem;
+        padding: .3em;
+      }
   body
-   div
+   div#page-switcher
+    button
+    button
+
     form id="search-form" onsubmit="return false"
       input name="search"
       input type="submit" value="Search" onclick="submitSearch()"
