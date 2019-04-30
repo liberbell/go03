@@ -21,7 +21,7 @@ type Book struct {
 }
 
 type Page struct {
-	Books []book
+	Books []Book
 }
 
 type SearchResult struct {
