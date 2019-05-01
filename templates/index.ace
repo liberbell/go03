@@ -18,7 +18,7 @@ html
         margin: 1em;
         padding: .3em;
       }
-      #search-Page {
+      #search-page {
         display: none;
       }
 
