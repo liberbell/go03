@@ -49,7 +49,7 @@ html
             th width="35%" Author
             th width="20%" Classification
           tbody#view-results
-            {{ range .Books}}
+            {{range .Books}}
                tr
                  td {{.Title}}
                  td {{.Author}}
@@ -60,7 +60,7 @@ html
     = javascript
       function showSearchPage() {
         $("#search-page").show()
-        $("view-page").hide()
+        $("#view-page").hide()
       }
 
       function showViewPage() {
