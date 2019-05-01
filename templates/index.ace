@@ -45,6 +45,12 @@ html
         $("#search-page").show();
         $("view-page").hide();
       }
+
+      function showViewPage() {
+        $("#search-page").hide();
+        $("#view-page").show();
+      }
+      
       function submitSearch() {
         $.ajax({
           url: "/search",
