@@ -1,18 +1,16 @@
 = doctype html
-
 html
   head
-   = css
+    = css
       #search-results tr:hover {
         background-color: lightgrey;
         cursor: pointer;
       }
-
       #page-switcher {
-        width:100%;
+        width: 100%;
         text-align: center;
       }
-      #page-switcher button{
+      #page-switcher button {
         font-size: 24px;
         font-weight: bold;
         margin: 1em;
@@ -21,13 +19,12 @@ html
       #search-page {
         display: none;
       }
-
   body
-   div#page-switcher
-    button onclick="showViewPage()" View Library
-    button onclick="showSearchPage()" Add Books
+    div#page-switcher
+      button#view-library onclick="showViewPage()" View Library
+      button#add-books onclick="showSearchPage()" Add Books
 
-   div#search-page style="display: none;"
+    div#search-page
       form id="search-form" onsubmit="return false"
         input name="search"
         input type="submit" value="Search" onclick="submitSearch()"
@@ -48,24 +45,23 @@ html
             th width="45%" Title
             th width="35%" Author
             th width="20%" Classification
-          tbody#view-results
-            {{range .Books}}
-               tr
-                 td {{.Title}}
-                 td {{.Author}}
-                 td {{.Classification}}
-            {{end}}
+        tbody#view-results
+          {{range .Books}}
+            tr
+              td {{.Title}}
+              td {{.Author}}
+              td {{.Classification}}
+          {{end}}
 
     script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"
     = javascript
-      function showSearchPage() {
-        $("#search-page").show()
-        $("#view-page").hide()
-      }
-
       function showViewPage() {
         $("#search-page").hide()
         $("#view-page").show()
+      }
+      function showSearchPage() {
+        $("#search-page").show()
+        $("#view-page").hide()
       }
 
       function submitSearch() {
