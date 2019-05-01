@@ -21,7 +21,7 @@ html
       #search-Page {
         display: none;
       }
-      
+
   body
    div#page-switcher
     button onclick="showViewPage()" View Library
@@ -43,7 +43,7 @@ html
 
     div#view-page
       table width="100%"
-        thread
+        thead
           tr style="text-align: left;"
             th width="45%" Title
             th width="35%" Author
@@ -59,13 +59,13 @@ html
     script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"
     = javascript
       function showSearchPage() {
-        $("#search-page").show();
-        $("view-page").hide();
+        $("#search-page").show()
+        $("view-page").hide()
       }
 
       function showViewPage() {
-        $("#search-page").hide();
-        $("#view-page").show();
+        $("#search-page").hide()
+        $("#view-page").show()
       }
 
       function submitSearch() {
