@@ -93,12 +93,15 @@ func main() {
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
-		pk, _ := result.LastInsertID()
+		pk, _ := result.LastInsertId()
 		b := Book{
 			PK:             int(pk),
 			Title:          book.BookData.Title,
 			Author:         book.BookData.Author,
 			Classifycation: book.Classification.MostPopular,
+		}
+		if err := json.NewEncoder(w).Encode(b); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
 
