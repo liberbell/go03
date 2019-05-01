@@ -88,10 +88,17 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 
-		_, err = db.Exec("insert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)",
+		result, err := db.Exec("insert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)",
 			nil, book.BookData.Title, book.BookData.Author, book.BookData.ID, book.Classification.MostPopular)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		pk, _ := result.LastInsertID()
+		b := Book{
+			PK:             int(pk),
+			Title:          book.BookData.Title,
+			Author:         book.BookData.Author,
+			Classifycation: book.Classification.MostPopular,
 		}
 	})
 
