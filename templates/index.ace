@@ -12,12 +12,16 @@ html
         width:100%;
         text-align: center;
       }
-      #page-switcher {
+      #page-switcher button{
         font-size: 24px;
         font-weight: bold;
-        margin: lem;
+        margin: 1em;
         padding: .3em;
       }
+      #search-Page {
+        display: none;
+      }
+      
   body
    div#page-switcher
     button onclick="showViewPage()" View Library
