@@ -86,7 +86,7 @@ html
                   success: function(data) {
                     var book = JSON.parse(data);
                     if (!book) return;
-                    $("#view-results")
+                    $("#view-results").append("<tr><td>" + book.Title + "</td><td>" + book.Author + "</td><td>" + book.Classification + "</td></tr>");
                   }
                 })
               })
